@@ -37,3 +37,27 @@ the customers can be routed back to blue environment until green is fixed.
 Canary env is where only small number of user traffic is directed to new version of application.
 - It can be managed through adjusting replicas of two different deployments (managing old and new version of application)
 
+#### Helm
+- A package management tool for applications running on kubernetes. Using helm, we can install all of the kubernetes objects seemlessly that are required to run the application successfully.
+#### Helm Charts
+- A helm software package which contains all of the kubernetes resource definitions needed to run application in cluster.
+#### Helm respository
+- Collection of available charts for an application and a source to download or browse through them.
+```
+# Add helm repo
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+# To update all of the added helm repos
+helm repo update
+
+# To search for a repo
+helm search repo bitnami
+
+# To install a specific chart from repo in a namespace
+helm install <name-of-the-application/release-name> <chart-name> -n <namespace>
+helm install test-dokuwiki bitnami/dokuwiki -n dokuwiki
+
+# To uninstall helm release (release is the name of application that we used while installing the chart)
+helm install <name-of-the-application/release-name> -n <namespace>
+helm uninstall test-dokuwiki -n dokuwiki
+```
