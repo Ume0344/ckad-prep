@@ -12,3 +12,36 @@
 #### Probes
 - Part of container specs which allow the user to customize how k8s detect the state of containers.
 - [Examples of Liveness, readiness, startup probes](https://github.com/Ume0344/kubernetes-probes?tab=readme-ov-file)
+
+#### Monitoring Kubernetes Applications
+- Metrics API in kubernetes provide the basic data about application, pods or nodes. To get this data from Metrics API, 
+we need to install Metrics Server to our cluster.
+```
+kubectl apply -f https://raw.githubusercontent.com/ACloudGuru-Resources/content-cka-resources/master/metrics-server-components.yaml
+```
+- Once it is installed, we can use kubernetes `top` command, to get metrics data;
+```
+kubectl top pods/nodes
+```
+
+#### Accessing container logs
+- Kubernetes stores stdout/stderr console output of each container to container log.
+```
+kubectl logs <pod-name> -c <container-name>
+```
+
+#### Debugging in Kubernetes
+- Check object status; `kubectl get`
+- Check object configuration; `kubectl describe`
+- Check logs; `kubectl logs`
+
+```
+kubectl get pods --all-namespaces
+kubectl get pod <pod> -o yaml
+```
+**Cluster-Level logs**
+- API server logs are present at `/var/log/containers/`.
+- `kubelet` logs can be found using `journalctl` as `kubelet` runs a a service.
+```
+sudo journalctl -u kubelet
+```
