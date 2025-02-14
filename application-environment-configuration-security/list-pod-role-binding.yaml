@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: list-pods-rb
+subjects: # list of accounts this role binding is addressing
+- kind: ServiceAccount
+  name: my-sa
+  namespace: default
+roleRef: # which role we need to bind
+  kind: Role
+  name: list-pods-role
+  apiGroup: rbac.authorization.k8s.io
