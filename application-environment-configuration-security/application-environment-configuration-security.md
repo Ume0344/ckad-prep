@@ -20,3 +20,8 @@ It is a system for managing authorization. This allows us to define what users a
 - Role - To define the permissions [verbs (list, get) and resources (pods, services)]. It is namespaced. We can create cluster roles which will be cluster-scoped
 - Role Binding - This object binds a service account, user or group to a role.
 
+#### Admission Controller 
+Admission controller checks the requests coming to API server after authentication/authorization but before perssiting the request to datastore (etcd). 
+We can have multiple admission controllers turned on for our cluster by updating pod manifest of API server at `/etc/kubernetes/manifests/kube-apiserver.yaml` at
+the flag  `--enable-admission-plugins`.
+Forexample, `NamespaceAutoProvision` is an admission controller to create namespaces used by resources if namespace is not present.
