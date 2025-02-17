@@ -25,3 +25,13 @@ Admission controller checks the requests coming to API server after authenticati
 We can have multiple admission controllers turned on for our cluster by updating pod manifest of API server at `/etc/kubernetes/manifests/kube-apiserver.yaml` at
 the flag  `--enable-admission-plugins`.
 Forexample, `NamespaceAutoProvision` is an admission controller to create namespaces used by resources if namespace is not present.
+
+#### ConfigMaps and Secrets
+- ConfigMaps and secrets can be configured to pods as volumeMounts or environment variables. ()
+
+#### Security Context
+- We can define security context at pod level as well as container level.
+- A container's SecurityContext allows us to control advanced security-related settings for the container.
+- We can set the container's user ID (UID) and group ID (GID) with `securitContext.runAsUser` and `securityContext.runAsGroup`.
+- Enable or disable privilege escalation with `securityContext.allowPrivilegeEscalation`.
+- Make the container root filesystem read-only with `securityContext.readOnlyRootFilesystem`. If we try to write to any file inside container, it will fail as filesystem is read-only. i.e, `kubectl exec securitycontext-pod -- sh -c "echo hi > test.txt"` will throw error; `sh: can't create test.txt: Read-only file system`
