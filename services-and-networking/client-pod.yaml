@@ -9,4 +9,4 @@ spec:
   containers:
   - name: busybox
     image: radial/busyboxplus:curl
-    command: ['sh', '-c', 'while true; do curl -m 2 10.244.0.59; sleep 5; done']
+    command: ['sh', '-c', 'while true; do curl -m 2 10.244.0.64; sleep 5; done']
