@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: chewie
+  namespace: yoda
+spec:
+  containers:
+  - name: nginx
+    image: nginx:stable
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: kenobi-cm
+      mountPath: /etc/starwars
+  volumes:
+  - name: kenobi-cm
+    configMap:
+      name: kenobi
+      items:
+      - key: planet
+        path: planet
