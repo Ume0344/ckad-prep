@@ -1,0 +1,15 @@
+kind: Pod
+metadata:
+  name: pv-pod
+spec:
+  containers:
+  - name: busy-boy
+    image: busybox:stable
+    command: ['sh', '-c', 'while true; do sleep 3600; done']
+    volumeMounts:
+    - name: v-data
+      mountPath: /var/data
+  volumes:
+  - name: v-data
+    persistentVolumeClaim:
+      claimName: pvc-data
