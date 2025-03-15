@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: apple
+  namespace: dev
+spec:
+  containers:
+  - name: nginx-apple
+    image: nginx:stable
+    resources:
+      limits:
+        cpu: "500m"
+        memory: "612Mi"
+      requests:
+        cpu: '250m'
+        memory: "256Mi"
