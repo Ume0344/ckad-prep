@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pwd-runner
+  namespace: one
+spec:
+  startingDeadlineSeconds: 10 # this is the maximum amount of time (in seconds) that Kubernetes will wait for a missed job to start. Forexample, if job is scheduled at 10:01, k8s will wait till 10:01:10 for job to start.
+  schedule: "* * * * *" # every minute
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 10 # The activeDeadlineSeconds applies to the duration of the job, 
+                                # no matter how many Pods are created. Once a Job reaches activeDeadlineSeconds, all of its running Pods are terminated and the Job status will become type: Failed with reason: DeadlineExceeded.
+      template:
+        spec:
+          containers:
+          - name: pwd-runner
+            image: busybox:stable
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - pwd
+          restartPolicy: OnFailure
