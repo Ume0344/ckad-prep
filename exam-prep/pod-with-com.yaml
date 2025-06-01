@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-comand
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command: ["env"]
+  restartPolicy: Never
